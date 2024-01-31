@@ -1,28 +1,32 @@
 #include <iostream>
-#include <cstdlib>//Destruye objetos con almacenamiento estático y de subproceso y, después, devuelve el control
+#include <cstdlib>
 #include <ctime>
 
-int main() {
-    const int cantidadNumeros = 10;
-    int numeros[cantidadNumeros];
+const int cantidadNumeros = 10;
 
-    // Inicializar para generar números aleatorios
+// Función para generar números aleatorios
+void generarNumerosAleatorios(int numeros[]) {
     std::srand(std::time(0));
-
-    /
+    
     for (int i = 0; i < cantidadNumeros; ++i) {
-        numeros[i] = std::rand() % 100;  // Números aleatorios entre 0 y 99
+        numeros[i] = std::rand() % 100;  // Genera números aleatorios entre 0 y 99
     }
+}
 
-    // Mostrar los números aleatorios
+// Función para mostrar los números generados
+void mostrarNumeros(int numeros[]) {
     std::cout << "Números generados: ";
+    
     for (int i = 0; i < cantidadNumeros; ++i) {
         std::cout << numeros[i] << " ";
     }
 
-    // se encuentra el mayor y el menor
-    int mayor = numeros[0];
-    int menor = numeros[0];
+    std::cout << std::endl;
+}
+
+// Función para encontrar el mayor y el menor
+void encontrarMayorMenor(int numeros[], int& mayor, int& menor) {
+    mayor = menor = numeros[0];
 
     for (int i = 1; i < cantidadNumeros; ++i) {
         if (numeros[i] > mayor) {
@@ -33,18 +37,32 @@ int main() {
             menor = numeros[i];
         }
     }
+}
 
-    // para saber cuál es el promedio
+// Función para calcular el promedio
+double calcularPromedio(int numeros[]) {
     int suma = 0;
+
     for (int i = 0; i < cantidadNumeros; ++i) {
         suma += numeros[i];
     }
 
-    double promedio = static_cast<double>(suma) / cantidadNumeros;
+    return static_cast<double>(suma) / cantidadNumeros;
+}
 
-    // para mostrar resultado 
-    std::cout << "\nMayor: " << mayor << "\nMenor: " << menor << "\nPromedio: " << promedio << std::endl;
+int main() {
+    int numeros[cantidadNumeros];
+
+    generarNumerosAleatorios(numeros); // Llama a la función para generar números aleatorios
+    mostrarNumeros(numeros); // Llama a la función para mostrar los números generados
+
+    int mayor, menor;
+    encontrarMayorMenor(numeros, mayor, menor); // Llama a la función para encontrar el mayor y el menor
+
+    double promedio = calcularPromedio(numeros); // Llama a la función para calcular el promedio
+
+    // Muestra los resultados
+    std::cout << "Mayor: " << mayor << "\nMenor: " << menor << "\nPromedio: " << promedio << std::endl;
 
     return 0;
 }
-
