@@ -1,1 +1,50 @@
-https://github.com/nand
+#include <iostream>
+#include <cstdlib>//Destruye objetos con almacenamiento estático y de subproceso y, después, devuelve el control
+#include <ctime>
+
+int main() {
+    const int cantidadNumeros = 10;
+    int numeros[cantidadNumeros];
+
+    // Inicializar para generar números aleatorios
+    std::srand(std::time(0));
+
+    /
+    for (int i = 0; i < cantidadNumeros; ++i) {
+        numeros[i] = std::rand() % 100;  // Números aleatorios entre 0 y 99
+    }
+
+    // Mostrar los números aleatorios
+    std::cout << "Números generados: ";
+    for (int i = 0; i < cantidadNumeros; ++i) {
+        std::cout << numeros[i] << " ";
+    }
+
+    // se encuentra el mayor y el menor
+    int mayor = numeros[0];
+    int menor = numeros[0];
+
+    for (int i = 1; i < cantidadNumeros; ++i) {
+        if (numeros[i] > mayor) {
+            mayor = numeros[i];
+        }
+
+        if (numeros[i] < menor) {
+            menor = numeros[i];
+        }
+    }
+
+    // para saber cuál es el promedio
+    int suma = 0;
+    for (int i = 0; i < cantidadNumeros; ++i) {
+        suma += numeros[i];
+    }
+
+    double promedio = static_cast<double>(suma) / cantidadNumeros;
+
+    // para mostrar resultado 
+    std::cout << "\nMayor: " << mayor << "\nMenor: " << menor << "\nPromedio: " << promedio << std::endl;
+
+    return 0;
+}
+
